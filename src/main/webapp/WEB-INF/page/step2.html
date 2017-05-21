@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+<title>机型数量</title>
+<link rel="stylesheet" type="text/css" href="${basePath}/static/css/dell-v.css">
+</head>
+<body class="steps">
+<div class="containter">
+    <div class="widthAuto">
+      <form id="step2Form" action="${basePath}/coupon/step2Do">
+        <div class="center num">
+            <ul>
+                <li>机型</li>
+                <li>数量</li>
+            </ul>
+            	<input type="hidden" name="id" value="${discountUser.id}"/>
+            	<input type="hidden" name="discountId" value="${discountUser.discountId}"/>
+            	<input type="hidden" name="type" id="type"/>
+            	<input type="hidden" name="num" id="num" value="0"/>
+                <div>
+                    <label id="type1">灵越二合一</label>
+                    <div class="styled-select">
+                        <select id="data1">
+                        	<option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label id="type2">灵越其他产品</label>
+                    <div class="styled-select">
+                        <select  id="data2">
+                        	<option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label id="type3">其他PC产品</label>
+                    <div class="styled-select">
+                        <select  id="data3">
+                        	<option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label id="type4">配件</label>
+                    <div class="styled-select">
+                        <select class="parts"  id="data4">
+                        	<option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <span id="sn-show">提交</span>
+        </div>
+        <div class="center sn">
+            <h2>SN编码</h2>
+                <div><input type="text" placeholder="请输入SN编码"  name="sn" id="data5"></div>
+                <button type="button" id="sub">提交</button>
+        </div>
+      </form>
+    </div>
+</div>
+<script src="${basePath}/static/js/jquery.js"></script>
+<script src="${basePath}/static/js/rem.js"></script>
+<script src="${basePath}/static/js/select.js"></script>
+<script src="${basePath}/static/js/sn.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#data1").change(function(){
+			if($(this).val()==0){
+				$("#num").val(0);
+				return;
+			}
+			$("#type").val($("#type1").html());
+			$("#num").val($(this).val());
+			$("#data2").val(0);
+			$("#data3").val(0);
+			$("#data4").val(0);
+		});
+		$("#data2").change(function(){
+			if($(this).val()==0){
+				$("#num").val(0);
+				return;
+			}
+			$("#type").val($("#type2").html());
+			$("#num").val($(this).val());
+			$("#data1").val(0);
+			$("#data3").val(0);
+			$("#data4").val(0);
+		});
+		$("#data3").change(function(){
+			if($(this).val()==0){
+				$("#num").val(0);
+				return;
+			}
+			$("#type").val($("#type3").html());
+			$("#num").val($(this).val());
+			$("#data2").val(0);
+			$("#data1").val(0);
+			$("#data4").val(0);
+		});
+		$("#data4").change(function(){
+			if($(this).val()==0){
+				$("#num").val(0);
+				return;
+			}
+			$("#type").val($("#type4").html());
+			$("#num").val($(this).val());
+			$("#data2").val(0);
+			$("#data3").val(0);
+			$("#data1").val(0);
+		});
+		
+		$("#sn-show").click(function(){
+			if($("#type").val()=="配件"&&$("#num").val()!=0){
+	            $(".num").css("display","none");
+	            $(".sn").css("display","block");
+			}else{
+				if($("#num").val()==0){
+					alert("请选择机型和数量");
+				}else{
+					$("#step2Form").submit();
+				}
+			}
+        });
+		$("#sub").click(function(){
+			if($("#data5").val()==""||$("#data5").val()==null){
+				alert("请输入sn编号!");
+			}else{
+				$("#step2Form").submit();
+			}
+		});
+	});
+</script>
+</body>
+</html>

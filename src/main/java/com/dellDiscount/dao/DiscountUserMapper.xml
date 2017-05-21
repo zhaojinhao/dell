@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dellDiscount.dao.DiscountUserMapper" >
+  <resultMap id="BaseResultMap" type="com.dellDiscount.model.DiscountUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="discount_id" property="discountId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="stores" property="stores" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, discount_id, type, num, area, city, stores, sn, code, created_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from discount_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from discount_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.dellDiscount.model.DiscountUser" >
+    insert into discount_user (id, discount_id, type, 
+      num, area, city, stores, 
+      sn, code, created_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{discountId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{stores,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dellDiscount.model.DiscountUser" >
+    insert into discount_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="discountId != null" >
+        discount_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="stores != null" >
+        stores,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="createdTime != null" >
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="discountId != null" >
+        #{discountId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="stores != null" >
+        #{stores,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.dellDiscount.model.DiscountUser" >
+    update discount_user
+    <set >
+      <if test="discountId != null" >
+        discount_id = #{discountId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="stores != null" >
+        stores = #{stores,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null" >
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dellDiscount.model.DiscountUser" >
+    update discount_user
+    set discount_id = #{discountId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      stores = #{stores,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findByDiscountId" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from discount_user
+  	where discount_id = #{discountId}
+  </select>
+  
+    <select id="findDiscountUsers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from discount_user
+		<where>
+			<if test="discountUser.type != null and discountUser.type != ''">
+				and type = #{discountUser.type}
+			</if>
+			<if test="discountUser.area != null and discountUser.area != ''">
+				and area = #{discountUser.area}
+			</if>
+			<if test="discountUser.city != null and discountUser.city != ''">
+				and city = #{discountUser.city}
+			</if>
+			<if test="discountUser.stores != null and discountUser.stores != ''">
+				and stores = #{discountUser.stores}
+			</if>
+		</where>
+        order by ${columnsName} ${dir} limit #{start}, #{length}
+    </select>
+  	
+  	<select id="queryDataCount" resultType="integer">
+  		select count(*) from discount_user 
+  		<where>
+			<if test="discountUser.type != null and discountUser.type != ''">
+				and type = #{discountUser.type}
+			</if>
+			<if test="discountUser.area != null and discountUser.area != ''">
+				and area = #{discountUser.area}
+			</if>
+			<if test="discountUser.city != null and discountUser.city != ''">
+				and city = #{discountUser.city}
+			</if>
+			<if test="discountUser.stores != null and discountUser.stores != ''">
+				and stores = #{discountUser.stores}
+			</if>
+		</where>
+  	</select>
+</mapper>
