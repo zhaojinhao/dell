@@ -10,6 +10,7 @@ import com.dellDiscount.dao.CouponMapper;
 import com.dellDiscount.dao.DiscountCouponMapper;
 import com.dellDiscount.model.Coupon;
 import com.dellDiscount.model.DiscountCoupon;
+import com.dellDiscount.util.StrUtil;
 
 @Service
 public class DiscountCouponService {
@@ -36,6 +37,17 @@ public class DiscountCouponService {
 			}
 		}
 		return discount;
+	}
+	
+	public void insertCoupnt(){
+		for(int i=0; i<500;i++){
+			String str = StrUtil.randomString(8);
+			if(discountCouponMapper.find(str)==null){
+				DiscountCoupon coupon = new DiscountCoupon();
+				coupon.setCode(str);
+				discountCouponMapper.insertSelective(coupon);
+			}
+		}
 	}
 	
 	

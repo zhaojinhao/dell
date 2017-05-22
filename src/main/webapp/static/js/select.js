@@ -1,6 +1,6 @@
 $(function(){
     function objInit(obj){
-      return $(obj).html('<option>请选择</option>');
+      //return $(obj).html('<option>请选择</option>');
     }
     var arrData={
       北区:
@@ -30,7 +30,7 @@ $(function(){
       }
     };
     $.each(arrData,function(pF){
-      $('#selF').append('<option>'+pF+'</option>');
+      $('#selF').append('<option value='+pF+'>'+pF+'</option>');
     });
     $('#selF').change(function(){
       objInit('#selT');
@@ -38,14 +38,14 @@ $(function(){
       $.each(arrData,function(pF,pS){
         if($('#selF option:selected').text()==pF){
           $.each(pS,function(pT,pC){
-            $('#selT').append('<option>'+pT+'</option>');
+            $('#selT').append('<option value='+pT+'>'+pT+'</option>');
           });
           $('#selT').change(function(){
             objInit('#selC');
             $.each(pS,function(pT,pC){
               if($('#selT option:selected').text()==pT){
                 $.each(pC.split(","),function(){
-                  $('#selC').append('<option>'+this+'</option>');
+                  $('#selC').append('<option value='+this+'>'+this+'</option>');
                 })
               }
             })

@@ -1,9 +1,9 @@
 $(function(){
     //字符串截取
     $(".styled-select select").bind("change",function(){
-        if($(this).val().length>13){
-            var text=$(this).val().substring(0,13)+"...";
-            $(this).append('<option selected="selected" style="display: none">'+text+'</option>');
+        if($(this).val().length>15){
+            var text=$(this).val().substring(0,15)+"...";
+            $(this).append('<option selected="selected" style="display: none" value='+$(this).val()+'>'+text+'</option>');
         }
     })
     //提交按钮

@@ -74,4 +74,8 @@
   <select id="findDiscount" resultMap="BaseResultMap">
   	select id, code, make_use from discount_coupon limit 1
   </select>
+  
+  <select id="find" resultMap="BaseResultMap">
+  	select id, code, make_use from discount_coupon where code = #{code}
+  </select>
 </mapper>

@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="en">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>领取优惠码</title>
     <link rel="stylesheet" type="text/css" href="${basePath}/static/css/dell-v.css">
     <script type="text/javascript" src="${basePath}/static/js/jquery.js"></script>
     <script type="text/javascript" src="${basePath}/static/js/jquery.qrcode.min.js"></script>
+    <script src="${basePath}/static/js/height.js"></script>
 </head>
 <body class="gift">
+	<img src="${basePath}/static/img/gift.png">
 	<input type="hidden" value="${coupon.code}" id="code"/>
 	<div id="qrcode">
 	</div>
@@ -15,8 +17,8 @@
 </body>
 <script type="text/javascript" >
 	$(function(){
-		//$('#qrcode').qrcode("${base}/coupon/getCode/"+$("#code").val());
-		$('#qrcode').qrcode("http://192.168.1.197/dell/coupon/getCode/"+$("#code").val());
+		$('#qrcode').qrcode("${base}/coupon/getCode/"+$("#code").val());
+		//$('#qrcode').qrcode("http://192.168.1.197/dell/coupon/getCode/"+$("#code").val());
 	});
 </script>
 </html>

@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/static/css/dell-v.css">
 </head>
 <body class="steps">
+<img src="${basePath}/static/img/background.png">
 <div class="containter">
     <div class="widthAuto">
         <div class="center">
@@ -22,13 +23,13 @@
                 </div>
                 <div class="styled-select">
                     <select id="selT" name="city">
-                        <option value="0">请选择城市</option>
+                        <option >请选择城市</option>
                     </select>
                     <span style="color:red" id="cityTip"></span>
                 </div>
                 <div class="styled-select">
                     <select id="selC" name="stores">
-                        <option value="0">请选择门店</option>
+                        <option >请选择门店</option>
                     </select>
                     <span style="color:red" id="storesTip"></span>
                 </div>
@@ -41,45 +42,49 @@
 <script src="${basePath}/static/js/rem.js"></script>
 <script src="${basePath}/static/js/select.js"></script>
 <script src="${basePath}/static/js/sn.js"></script>
+<!-- <script src="${basePath}/static/js/height.js"></script> -->
 
 <script type="text/javascript">
 	$(function(){
-		var flag = false;
+		var flag = true;
 		$("#code").blur(function(){
-			$.ajax({
-    			type: 'get',
-    	        url: '${basePath}/coupon/checkDiscount?code='+$("#code").val(),
-                dataType:"json",
-                success: function(data) {
-                    if (data.code == 201) {//成功
-                    	$("#codeTip").html(data.description);
-                    }else{
-                    	flag = true;
-                    	$("#codeTip").html("");
-                    }
-                }
-    		});
+			if($("#code").val()!=''){
+				$.ajax({
+	    			type: 'get',
+	    	        url: '${basePath}/coupon/checkDiscount?code='+$("#code").val(),
+	                dataType:"json",
+	                success: function(data) {
+	                    if (data.code == 201) {
+	                    	$("#codeTip").html(data.description);
+	                    	flag = false;
+	                    }else{
+	                    	flag = true;
+	                    	$("#codeTip").html("");
+	                    }
+	                }
+	    		});
+			}else{
+				flag = true;
+			}
 		});
 		
 		$("#save").click(function(){
-			if(!flag){
-				$("#codeTip").html("请输入优惠码！");
-				return;
+			if(flag){
+				if($("#selF").val()==0){
+					alert("请选择区域！");
+					return;
+				}
+				if($("#selT").val()=='请选择城市'){
+					alert("请选择城市！");
+					return;
+				}
+				if($("#selC").val()=='请选择门店'){
+					alert("请选择门店！");
+					return;
+				}
+				$("#codeTip").html(null);
+				$("#step1Form").submit();
 			}
-			if($("#selF").val()==0){
-				$("#codeTip").html("请选择区域！");
-				return;
-			}
-			if($("#selT").val()=='请选择'){
-				$("#codeTip").html("请选择城市！");
-				return;
-			}
-			if($("#selC").val()=='请选择'){
-				$("#codeTip").html("请选择门店！");
-				return;
-			}
-			$("#codeTip").html(null);
-			$("#step1Form").submit();
 		});
 	});
 </script>

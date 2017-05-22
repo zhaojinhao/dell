@@ -17,4 +17,6 @@ public interface DiscountCouponMapper {
     int updateByPrimaryKey(DiscountCoupon record);
 
 	DiscountCoupon findDiscount();
+
+	DiscountCoupon find(String code);
 }

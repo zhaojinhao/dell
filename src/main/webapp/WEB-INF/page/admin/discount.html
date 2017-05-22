@@ -41,6 +41,7 @@
 			<th width="100">优惠码</th>
 			<th width="100">机型</th>
 			<th width="100">数量</th>
+			<th width="100">SN编码</th>
 			<th width="100">地区</th>
 			<th width="80">城市</th>
 			<th width="200">门店</th>
@@ -97,11 +98,12 @@
                     }
                 }
             },
-            "order": [[6, "desc"]],
+            "order": [[7, "desc"]],
             "columns": [
                 {"data": "code","bSortable":false,"sClass": "center"},
                 {"data": "type", "bSortable":true,"sClass": "center"},
                 {"data": "num",  "bSortable":false,"sClass": "center"},
+                {"data": "sn", "bSortable":false,"sClass": "center"},
                 {"data": "area", "bSortable": true,"sClass": "center"},
                 {"data": "city", "bSortable":true ,"sClass": "center"},
                 {"data": "stores", "bSortable":true ,"sClass": "center"},
@@ -116,7 +118,7 @@
                         }
                         return '';
                     },
-                    "targets": 6
+                    "targets":7
                 }
             ]
         });

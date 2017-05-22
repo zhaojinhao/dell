@@ -6,25 +6,34 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/static/css/dell-v.css">
 </head>
 <body class="steps">
+<img src="${basePath}/static/img/background.png">
 <div class="containter">
     <div class="widthAuto">
       <form id="step2Form" action="${basePath}/coupon/step2Do">
-        <div class="center num">
+        <div class="center num" style="margin-top:-2rem">
             <ul>
                 <li>机型</li>
                 <li>数量</li>
             </ul>
             	<input type="hidden" name="id" value="${discountUser.id}"/>
             	<input type="hidden" name="discountId" value="${discountUser.discountId}"/>
+            	<input type="hidden" name="code" value="${discountUser.code}"/>
+            	<input type="hidden" name="area" value="${discountUser.area}"/>
+            	<input type="hidden" name="city" value="${discountUser.city}"/>
+            	<input type="hidden" name="stores" value="${discountUser.stores}"/>
             	<input type="hidden" name="type" id="type"/>
             	<input type="hidden" name="num" id="num" value="0"/>
+            	<input type="hidden" name="sn" id="sn" />
                 <div>
                     <label id="type1">灵越二合一</label>
                     <div class="styled-select">
                         <select id="data1">
-                        	<option>0</option>
+                        	<#list 0..5 as t>
+								<option>${t}</option>
+							</#list> 
+                        	<!-- <option>0</option>
                             <option>1</option>
-                            <option>2</option>
+                            <option>2</option> -->
                         </select>
                     </div>
                 </div>
@@ -32,9 +41,9 @@
                     <label id="type2">灵越其他产品</label>
                     <div class="styled-select">
                         <select  id="data2">
-                        	<option>0</option>
-                            <option>1</option>
-                            <option>2</option>
+                        	<#list 0..5 as t>
+								<option>${t}</option>
+							</#list> 
                         </select>
                     </div>
                 </div>
@@ -42,9 +51,9 @@
                     <label id="type3">其他PC产品</label>
                     <div class="styled-select">
                         <select  id="data3">
-                        	<option>0</option>
-                            <option>1</option>
-                            <option>2</option>
+                        	<#list 0..5 as t>
+								<option>${t}</option>
+							</#list> 
                         </select>
                     </div>
                 </div>
@@ -52,17 +61,19 @@
                     <label id="type4">配件</label>
                     <div class="styled-select">
                         <select class="parts"  id="data4">
-                        	<option>0</option>
-                            <option>1</option>
-                            <option>2</option>
+                        	<#list 0..5 as t>
+								<option>${t}</option>
+							</#list> 
                         </select>
                     </div>
                 </div>
                 <span id="sn-show">提交</span>
         </div>
         <div class="center sn">
-            <h2>SN编码</h2>
-                <div><input type="text" placeholder="请输入SN编码"  name="sn" id="data5"></div>
+            <h2>SN编码</h2><!--name="sn" id="data5"  -->
+                <div id="snDiv"> 
+                	<input type="text" placeholder="请输入SN编码" class="snCode">
+                </div>
                 <button type="button" id="sub">提交</button>
         </div>
       </form>
@@ -120,7 +131,13 @@
 		});
 		
 		$("#sn-show").click(function(){
-			if($("#type").val()=="配件"&&$("#num").val()!=0){
+			if($("#type").val()!="配件"&&$("#num").val()!=0){
+				var num = $("#num").val();
+				var snStr ="";
+				for(var i = 0; i<num;i++){
+					snStr+='<input type="text" placeholder="请输入SN编码" class="snCode">';
+				}
+				$("#snDiv").html(snStr);
 	            $(".num").css("display","none");
 	            $(".sn").css("display","block");
 			}else{
@@ -132,9 +149,19 @@
 			}
         });
 		$("#sub").click(function(){
-			if($("#data5").val()==""||$("#data5").val()==null){
-				alert("请输入sn编号!");
-			}else{
+			var arrPrePrice = [];//定义数组  
+			var snFlag = true;
+			$(".snCode").each(function(){
+				if($(this).val() == ''){
+					alert("请输入sn编号!");
+					snFlag = false;
+					return false;
+				}else{
+					arrPrePrice.push($(this).val());
+				}
+			});
+			if(snFlag){
+				$("#sn").val(arrPrePrice);
 				$("#step2Form").submit();
 			}
 		});

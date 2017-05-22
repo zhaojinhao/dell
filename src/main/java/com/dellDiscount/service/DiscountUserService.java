@@ -18,12 +18,14 @@ public class DiscountUserService {
 	private CouponMapper couponMapper;
 
 	public DiscountUser insert(DiscountUser discountUser) {
-		DiscountUser discount = discountUserMapper.findByDiscountId(discountUser.getDiscountId());
-		if (discount != null) {// 判断该优惠码信息是否已经保存
-			return discount;
+		if(discountUser.getDiscountId()!=null){
+			DiscountUser discount = discountUserMapper.findByDiscountId(discountUser.getDiscountId());
+			if (discount != null) {// 判断该优惠码信息是否已经保存
+				return discount;
+			}
 		}
 		if (discountUserMapper.insertSelective(discountUser) == 1) {
-			return discountUserMapper.findByDiscountId(discountUser.getDiscountId());
+			return discountUserMapper.selectByPrimaryKey(discountUser.getId());
 		}
 		return null;
 	}

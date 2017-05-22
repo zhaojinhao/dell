@@ -14,6 +14,7 @@ import com.dellDiscount.model.DiscountUser;
 import com.dellDiscount.service.CouponService;
 import com.dellDiscount.service.DiscountUserService;
 import com.dellDiscount.util.JsonUtil;
+import com.dellDiscount.util.StrKit;
 
 @Controller
 @RequestMapping("/coupon")
@@ -49,22 +50,24 @@ public class CouponController {
 
 	@RequestMapping("/step1Do")
 	public String step1Do(DiscountUser discountUser, Model model) {
-		Coupon coupon = couponService.findByCode(discountUser.getCode());
-		if (coupon == null)
-			return "step1";
-		discountUser.setDiscountId(coupon.getId());
-		discountUser.setCreatedTime(new Date());
-		DiscountUser discount = discountUserService.insert(discountUser);
-		if (discount == null)
-			return "step1";
-		model.addAttribute("discountUser", discount);
+		if(StrKit.notBlank(discountUser.getCode())){
+			Coupon coupon = couponService.findByCode(discountUser.getCode());
+			if (coupon == null)
+				return "step1";
+			discountUser.setDiscountId(coupon.getId());
+		}
+		model.addAttribute("discountUser", discountUser);
 		return "step2";
 	}
 
 	@RequestMapping("/step2Do")
 	public String step2Do(DiscountUser discountUser) {
-		if (discountUserService.update(discountUser))
+		discountUser.setCreatedTime(new Date());
+		DiscountUser discount = discountUserService.insert(discountUser);
+		if (discount == null)
 			return "step1";
+		/*if (discountUserService.update(discountUser))
+			return "step1";*/
 		return "systemError";
 	}
 
