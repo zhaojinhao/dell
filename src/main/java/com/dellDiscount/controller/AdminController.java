@@ -42,7 +42,7 @@ public class AdminController {
 	public Map<String, Object> data(DiscountUser discountUser, Integer start, Integer length, ReceiveBean order,
 			Integer draw) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<DiscountUser> discountUsers = discountUserService.findDiscountUsers(discountUser, start, length,
+		List<Map<String, Object>> discountUsers = discountUserService.findDiscountUsers(discountUser, start, length,
 				order.getColumnsName(), order.getDir());
 		int count = discountUserService.queryDataCount(discountUser);
 		map.put("data", discountUsers);

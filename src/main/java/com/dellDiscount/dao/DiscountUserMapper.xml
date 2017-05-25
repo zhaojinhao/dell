@@ -160,25 +160,27 @@
   	where discount_id = #{discountId}
   </select>
   
-    <select id="findDiscountUsers" resultMap="BaseResultMap">
+    <select id="findDiscountUsers" resultType="map">
         select
-        <include refid="Base_Column_List"/>
-        from discount_user
+        d_u.id, d_u.discount_id discountId, d_u.type, d_u.num, d_u.area, d_u.city, d_u.stores, d_u.sn, d_u.code, 
+        d_u.created_time createdTime, c.type codeType
+        from discount_user d_u 
+        left join coupon c on c.id = d_u.discount_id 
 		<where>
 			<if test="discountUser.type != null and discountUser.type != ''">
-				and type = #{discountUser.type}
+				and d_u.type = #{discountUser.type}
 			</if>
 			<if test="discountUser.area != null and discountUser.area != ''">
-				and area = #{discountUser.area}
+				and d_u.area = #{discountUser.area}
 			</if>
 			<if test="discountUser.city != null and discountUser.city != ''">
-				and city = #{discountUser.city}
+				and d_u.city = #{discountUser.city}
 			</if>
 			<if test="discountUser.stores != null and discountUser.stores != ''">
-				and stores = #{discountUser.stores}
+				and d_u.stores = #{discountUser.stores}
 			</if>
 		</where>
-        order by ${columnsName} ${dir} limit #{start}, #{length}
+        order by d_u.${columnsName} ${dir} limit #{start}, #{length}
     </select>
   	
   	<select id="queryDataCount" resultType="integer">

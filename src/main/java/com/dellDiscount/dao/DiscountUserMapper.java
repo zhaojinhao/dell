@@ -1,6 +1,7 @@
 package com.dellDiscount.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -22,7 +23,7 @@ public interface DiscountUserMapper {
 
 	DiscountUser findByDiscountId(Integer discountId);
 
-	List<DiscountUser> findDiscountUsers(@Param("discountUser") DiscountUser discountUser, @Param("start") Integer start,
+	List<Map<String, Object>> findDiscountUsers(@Param("discountUser") DiscountUser discountUser, @Param("start") Integer start,
 			@Param("length") Integer length, @Param("columnsName") String columnsName, @Param("dir") String dir);
 
 	int queryDataCount(@Param("discountUser") DiscountUser discountUser);

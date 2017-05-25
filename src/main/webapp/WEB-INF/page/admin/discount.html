@@ -39,6 +39,7 @@
 		</tr>
 		<tr class="text-c">
 			<th width="100">优惠码</th>
+			<th width="100">领取方式</th>
 			<th width="100">机型</th>
 			<th width="100">数量</th>
 			<th width="100">SN编码</th>
@@ -98,9 +99,10 @@
                     }
                 }
             },
-            "order": [[7, "desc"]],
+            "order": [[8, "desc"]],
             "columns": [
                 {"data": "code","bSortable":false,"sClass": "center"},
+                {"data": "codeType","bSortable":false,"sClass": "center"},
                 {"data": "type", "bSortable":true,"sClass": "center"},
                 {"data": "num",  "bSortable":false,"sClass": "center"},
                 {"data": "sn", "bSortable":false,"sClass": "center"},
@@ -110,6 +112,22 @@
                 {"data": "createdTime", "bSortable": true,"sClass": "center"}
             ],
             "columnDefs":[
+				{	                          
+				    "defaultContent": "",
+				    "targets": "_all"
+				  },
+				{
+				    "render": function (data, type, row) {
+				        if (data == 0) {
+				            return '网址领取';
+				        }
+				        if(data == 1){
+				        	 return '扫码领取';
+				        }
+				        return '';
+				    },
+				    "targets":1
+				},       
                 //格式化日期
                 {
                     "render": function (data, type, row) {
@@ -118,7 +136,7 @@
                         }
                         return '';
                     },
-                    "targets":7
+                    "targets":8
                 }
             ]
         });

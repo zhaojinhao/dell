@@ -1,6 +1,7 @@
 package com.dellDiscount.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class DiscountUserService {
 		return false;
 	}
 
-	public List<DiscountUser> findDiscountUsers(DiscountUser discountUser, Integer start, Integer length, String columnsName,
+	public List<Map<String, Object>> findDiscountUsers(DiscountUser discountUser, Integer start, Integer length, String columnsName,
 			String dir) {
 		return discountUserMapper.findDiscountUsers(discountUser, start, length, columnsName, dir);
 	}
