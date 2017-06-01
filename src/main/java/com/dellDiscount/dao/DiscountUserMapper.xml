@@ -180,7 +180,10 @@
 				and d_u.stores = #{discountUser.stores}
 			</if>
 		</where>
-        order by d_u.${columnsName} ${dir} limit #{start}, #{length}
+        order by d_u.${columnsName} ${dir} 
+        <if test="start!=null">
+	        limit #{start}, #{length}
+        </if>
     </select>
   	
   	<select id="queryDataCount" resultType="integer">

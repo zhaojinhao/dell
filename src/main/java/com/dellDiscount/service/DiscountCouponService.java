@@ -41,7 +41,7 @@ public class DiscountCouponService {
 	
 	public void insertCoupnt(){
 		for(int i=0; i<500;i++){
-			String str = StrUtil.randomString(8);
+			String str = StrUtil.randomNumber(8);
 			if(discountCouponMapper.find(str)==null){
 				DiscountCoupon coupon = new DiscountCoupon();
 				coupon.setCode(str);

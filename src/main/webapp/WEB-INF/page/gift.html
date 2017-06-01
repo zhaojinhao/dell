@@ -11,15 +11,9 @@
 </head>
 <body class="gift">
 	<img src="${basePath}/static/img/gift.png">
-	<input type="hidden" value="${coupon.code}" id="code"/>
-	<div id="qrcode">
-	</div>
+	<i>优惠券编码：${coupon.code}</i>
     <!-- <img src="${basePath}/static/img/code.png"> -->
 </body>
 <script type="text/javascript" >
-	$(function(){
-		$('#qrcode').qrcode("${base}/coupon/getCode/"+$("#code").val());
-		//$('#qrcode').qrcode("http://192.168.1.197/dell/coupon/getCode/"+$("#code").val());
-	});
 </script>
 </html>

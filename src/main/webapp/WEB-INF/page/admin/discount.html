@@ -31,7 +31,7 @@
 		<button type="button" class="btn btn-success" id="searchBtn" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
 		<!-- </form> -->
 	</div>
-	
+	<span class="r"><a href="javascript:;" id="export">导出数据</a></span>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 		<tr>
@@ -59,8 +59,18 @@
 <script type="text/javascript" src="${basePath}/static/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
  <script type="text/javascript">
     var datatable;
+    var columnName;
+    var orderDir;
     $(function(){
         initDatatable();
+        $("#export").click(function(){
+     		var type=$("#type").val();
+     		var area = $('#area').val();
+     		var city = $('#city').val();
+     		var stores = $('#stores').val();
+    		location.href="${basePath}/admin/discount/export?type="+type+"&area="+area+"&city="+city
+    				+"&stores="+stores+"&columnName="+columnName+"&orderDir="+orderDir;
+    	});
     });
 
     function initDatatable() {
@@ -91,6 +101,9 @@
                     d.area = $('#area').val();
                     d.city = $('#city').val();
                     d.stores = $('#stores').val();
+                    var columnIndex = d.order[0].column;
+                    orderDir = d.order[0].dir;
+                    columnName = d.columns[columnIndex].data;
                     for (var i = 0; i < d.columns.length; i++) {
                         column = d.columns[i];
                         column.searchRegex = column.search.regex;
